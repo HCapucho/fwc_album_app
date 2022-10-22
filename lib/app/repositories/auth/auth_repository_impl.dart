@@ -17,7 +17,7 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<String> login(
       {required String email, required String password}) async {
     try {
-      final result = await dio.auth().post('/api/auth', data: {
+      final result = await dio.post('/api/auth', data: {
         'email': email,
         'password': password,
       });
