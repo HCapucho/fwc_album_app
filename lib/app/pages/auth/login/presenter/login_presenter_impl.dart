@@ -21,9 +21,9 @@ class LoginPresenterImpl implements LoginPresenter {
       await loginService.execute(email: email, password: password);
       _view.success();
     } on UnauthorizedException {
-      _view.error('Usuário ou senha inválidos');
+      _view.error('Usuario ou senha invalidos');
     } catch (e, s) {
-      log('Usuário ou senha inválidos', error: e, stackTrace: s);
+      log('Usuario ou senha invalidos', error: e, stackTrace: s);
       _view.error('Erro ao realizar login');
     }
   }

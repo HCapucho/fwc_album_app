@@ -1,4 +1,4 @@
-import 'package:fwc_album_app/app/core/models/user_model.dart';
+import 'package:fwc_album_app/app/models/user_model.dart';
 
 abstract class HomeView {
   void updateUser(UserModel user);
