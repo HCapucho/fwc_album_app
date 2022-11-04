@@ -10,11 +10,14 @@ abstract class MyStickersViewImpl extends State<MyStickersPage>
     with Messages<MyStickersPage>, Loader<MyStickersPage>
     implements MyStickersView {
   var album = <GroupsStickers>[];
+  var statusFilter = 'all';
+  var countries = <String, String>{};
 
   @override
   void initState() {
     widget.presenter.view = this;
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
+      showLoader();
       widget.presenter.getMyAlbum();
     });
     super.initState();
@@ -28,6 +31,25 @@ abstract class MyStickersViewImpl extends State<MyStickersPage>
 
   @override
   void loadedPage(List<GroupsStickers> album) {
+    hideLoader();
+    setState(() {
+      this.album = album;
+      countries = {
+        for (var c in album) c.countryCode: c.countryName,
+      };
+    });
+  }
+
+  @override
+  void updateStatusFilter(status) {
+    setState(() {
+      statusFilter = status;
+    });
+  }
+
+  @override
+  void updateAlbum(List<GroupsStickers> album) {
+    hideLoader();
     setState(() {
       this.album = album;
     });

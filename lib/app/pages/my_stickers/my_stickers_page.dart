@@ -27,18 +27,21 @@ class _MyStickersPageState extends MyStickersViewImpl {
         slivers: [
           SliverToBoxAdapter(
             child: Column(
-              children: const [
+              children: [
                 StickerStatusFilter(
-                  filterSelected: '',
+                  filterSelected: statusFilter,
                 ),
-                StickerGroupFilter(),
+                StickerGroupFilter(countries: countries),
               ],
             ),
           ),
           SliverList(
             delegate: SliverChildBuilderDelegate(
               (context, index) {
-                return StickerGroup();
+                return StickerGroup(
+                  group: album[index],
+                  statusFilter: statusFilter,
+                );
               },
               childCount: album.length,
             ),
